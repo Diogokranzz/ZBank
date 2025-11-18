@@ -30,13 +30,13 @@
   ],
   "env": {
     "APP_ENV": "production",
-    "APP_DEBUG": "true",
+    "APP_DEBUG": "false",
     "VERCEL": "1",
     "SESSION_DRIVER": "cookie",
     "CACHE_DRIVER": "array",
     "QUEUE_CONNECTION": "sync",
     "LOG_CHANNEL": "stderr",
-    "LOG_LEVEL": "debug",
+    "LOG_LEVEL": "error",
     "VIEW_COMPILED_PATH": "/tmp/storage/framework/views"
   },
   "functions": {
