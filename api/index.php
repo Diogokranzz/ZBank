@@ -14,6 +14,14 @@ if (getenv('APP_DEBUG') === 'true' || getenv('APP_DEBUG') === '1') {
 $_ENV['APP_STORAGE'] = '/tmp/storage';
 
 
+$bootstrapCache = '/tmp/bootstrap-cache';
+if (!is_dir($bootstrapCache)) {
+    mkdir($bootstrapCache, 0755, true);
+    error_log("[Vercel] Created bootstrap cache directory: {$bootstrapCache}");
+}
+
+$_ENV['APP_BOOTSTRAP_CACHE'] = $bootstrapCache;
+
 $storagePath = '/tmp/storage';
 $directories = [
     $storagePath,
@@ -33,6 +41,19 @@ foreach ($directories as $dir) {
         } else {
             error_log("[Vercel] Created directory: {$dir}");
         }
+    }
+}
+
+
+$cachedFiles = [
+    __DIR__ . '/../bootstrap/cache/packages.php' => $bootstrapCache . '/packages.php',
+    __DIR__ . '/../bootstrap/cache/services.php' => $bootstrapCache . '/services.php',
+];
+
+foreach ($cachedFiles as $source => $dest) {
+    if (file_exists($source) && !file_exists($dest)) {
+        copy($source, $dest);
+        error_log("[Vercel] Copied cache file: " . basename($source));
     }
 }
 
