@@ -4,17 +4,9 @@
     {
       "src": "api/index.php",
       "use": "vercel-php@0.7.0"
-    },
-    {
-      "src": "public/**",
-      "use": "@vercel/static"
     }
   ],
   "routes": [
-    {
-      "src": "/storage/(.*)",
-      "dest": "/storage/$1"
-    },
     {
       "src": "/build/(.*)",
       "dest": "/public/build/$1"
@@ -39,16 +31,9 @@
   "env": {
     "APP_ENV": "production",
     "APP_DEBUG": "false",
-    "APP_URL": "https://zbank-digital.vercel.app",
     "VERCEL": "1",
     "SESSION_DRIVER": "cookie",
     "CACHE_DRIVER": "array",
     "QUEUE_CONNECTION": "sync"
-  },
-  "functions": {
-    "api/index.php": {
-      "runtime": "vercel-php@0.7.0",
-      "maxDuration": 10
-    }
   }
 }
