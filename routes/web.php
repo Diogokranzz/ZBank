@@ -39,5 +39,8 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/', function () {
-    return view('landing.index');
+    if (auth()->check()) {
+        return redirect()->route('dashboard');
+    }
+    return redirect()->route('login');
 });
