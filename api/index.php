@@ -20,6 +20,13 @@ if (!is_dir($bootstrapCache)) {
     error_log("[Vercel] Created bootstrap cache directory: {$bootstrapCache}");
 }
 
+
+$bootstrapCacheDir = $bootstrapCache . '/cache';
+if (!is_dir($bootstrapCacheDir)) {
+    mkdir($bootstrapCacheDir, 0755, true);
+    error_log("[Vercel] Created bootstrap cache/cache directory: {$bootstrapCacheDir}");
+}
+
 $_ENV['APP_BOOTSTRAP_CACHE'] = $bootstrapCache;
 
 $storagePath = '/tmp/storage';
